@@ -9,7 +9,7 @@
     "type": "DOCKER",
     "volumes": [],
     "docker": {
-      "image": "10.0.1.86:6555/docker-cicd/nginx:latest",
+      "image": "dev.artifactory01.hds.local/nginx:latest",
       "network": "BRIDGE",
       "portMappings": [
         {
