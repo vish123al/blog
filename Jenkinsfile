@@ -1,7 +1,14 @@
+//def gitCommit() {
+  //  sh "git rev-parse HEAD > GIT_COMMIT"
+    //def gitCommit = readFile('GIT_COMMIT').trim()
+    //sh "rm -f GIT_COMMIT"
+    //return gitCommit
+//}
+
 def gitCommit() {
-    sh "git rev-parse HEAD > GIT_COMMIT"
-    def gitCommit = readFile('GIT_COMMIT').trim()
-    sh "rm -f GIT_COMMIT"
+    sh "git rev-parse HEAD > GIT_COMMIT-${env.BUILD_NUMBER}"
+    def gitCommit = readFile("GIT_COMMIT-${env.BUILD_NUMBER}").trim()
+    sh "rm -f GIT_COMMIT-${env.BUILD_NUMBER}"
     return gitCommit
 }
 
