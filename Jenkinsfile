@@ -11,7 +11,7 @@
     //sh "rm -f GIT_COMMIT-${env.BUILD_NUMBER}"
     //return gitCommit
 //}
-
+import java.text.SimpleDateFormat
 def dateFormat = new SimpleDateFormat("yyyyMMddHHmm")
 def date = new Date()
 def timestamp = dateFormat.format(date).toString()
