@@ -25,7 +25,7 @@ node {
     stage '(TEST) unit/integration testing'
    // sh 'make test'
     stage '(BUILD) building image'
-    sh "docker build -t dev.artifactory01.hds.local/nginx:${jobName}${timestamp}  ."
+    sh "docker build -t dev.artifactory01.hds.local/nginx:${jobName}:${timestamp}  ."
     sh "docker login -u admin -p 'Hitachi1' dev.artifactory01.hds.local"
     stage '(PUBLISH) Pushing the image '
     sh "docker push dev.artifactory01.hds.local/nginx:${jobName}${timestamp}"
