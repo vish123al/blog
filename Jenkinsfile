@@ -5,12 +5,16 @@
     //return gitCommit
 //}
 
-def gitCommit() {
-    sh "git rev-parse HEAD > GIT_COMMIT-${env.BUILD_NUMBER}"
-    def gitCommit = readFile("GIT_COMMIT-${env.BUILD_NUMBER}").trim()
-    sh "rm -f GIT_COMMIT-${env.BUILD_NUMBER}"
-    return gitCommit
-}
+//def gitCommit() {
+  //  sh "git rev-parse HEAD > GIT_COMMIT-${env.BUILD_NUMBER}"
+    //def gitCommit = readFile("GIT_COMMIT-${env.BUILD_NUMBER}").trim()
+    //sh "rm -f GIT_COMMIT-${env.BUILD_NUMBER}"
+    //return gitCommit
+//}
+
+def dateFormat = new SimpleDateFormat("yyyyMMddHHmm")
+def date = new Date()
+def timestamp = dateFormat.format(date).toString()
 
 node {
 
@@ -20,17 +24,17 @@ node {
     stage '(TEST) unit/integration testing'
    // sh 'make test'
     stage '(BUILD) building image'
-    sh "docker build -t dev.artifactory01.hds.local/nginx:${gitCommit()} ."
+    sh "docker build -t dev.artifactory01.hds.local/nginx:${timestamp()} ."
    // sh "docker login -u admin -p 'Hitachi1' dev.artifactory01.hds.local"
     stage '(PUBLISH) Pushing the image '
-    sh "docker push dev.artifactory01.hds.local/nginx:${gitCommit()}"
+    sh "docker push dev.artifactory01.hds.local/nginx:${timestamp()}"
      stage '(DEPLOY) Deploying the container'
     marathon(
         url: 'http://172.29.133.15:8080',
         forceUpdate: true,
         filename: 'marathon.json',
         appId: 'blog',
-        docker: "dev.artifactory01.hds.local/nginx:${gitCommit()}".toString()
+        docker: "dev.artifactory01.hds.local/nginx:${timestamp()}".toString()
     )
    
         stage 'Collect test reports'
