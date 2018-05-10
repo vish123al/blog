@@ -1,4 +1,4 @@
-FROM dev.artifactory01.hds.local/nginx
+FROM dev.artifactory01.hds.local/nginx:latest
 COPY index.html /usr/share/nginx/html/index.html
 COPY /css/ /usr/share/nginx/html/css/
 COPY /icon-fonts/ /usr/share/nginx/html/icon-fonts/
