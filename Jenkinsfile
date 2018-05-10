@@ -12,6 +12,7 @@
     //return gitCommit
 //}
 import java.text.SimpleDateFormat
+jobName = "blog"
 def dateFormat = new SimpleDateFormat("yyyyMMddHHmm")
 def date = new Date()
 def timestamp = dateFormat.format(date).toString()
@@ -24,7 +25,7 @@ node {
     stage '(TEST) unit/integration testing'
    // sh 'make test'
     stage '(BUILD) building image'
-    sh "docker build -t dev.artifactory01.hds.local/nginx:${timestamp} ."
+    sh "docker build -t dev.artifactory01.hds.local/nginx:${jobName} ${timestamp}  ."
     sh "docker login -u admin -p 'Hitachi1' dev.artifactory01.hds.local"
     stage '(PUBLISH) Pushing the image '
     sh "docker push dev.artifactory01.hds.local/nginx:${timestamp}"
