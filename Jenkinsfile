@@ -19,7 +19,7 @@ node {
     sh "docker push dev.artifactory01.hds.local/nginx:${gitCommit()}"
      stage '(DEPLOY) Deploying the container'
     marathon(
-        url: 'http://10.0.1.85:8080',
+        url: 'http://172.29.133.15:8080',
         forceUpdate: true,
         filename: 'marathon.json',
         appId: 'blog',
