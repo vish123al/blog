@@ -25,7 +25,7 @@ node {
    // sh 'make test'
     stage '(BUILD) building image'
     sh "docker build -t dev.artifactory01.hds.local/nginx:${timestamp} ."
-   // sh "docker login -u admin -p 'Hitachi1' dev.artifactory01.hds.local"
+    sh "docker login -u admin -p 'Hitachi1' dev.artifactory01.hds.local"
     stage '(PUBLISH) Pushing the image '
     sh "docker push dev.artifactory01.hds.local/nginx:${timestamp}"
      stage '(DEPLOY) Deploying the container'
